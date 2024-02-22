@@ -1,0 +1,108 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo app</title>
+    <style>
+
+        body{
+            cursor: pointer;
+            margin: 0;
+        }
+
+        .title{
+            display: block;
+            width: 100%;
+            text-align: center;
+            color: white;
+            margin-bottom: none;
+        }
+
+        .main{
+            background-color: rgb(41, 93, 151);
+            padding: 0 20px;
+            padding-top: 30px;
+            padding-bottom: 15px; 
+            
+        }
+        .type_todo{
+            display: grid;
+            grid-template-columns: 3fr 1fr;
+            background-color: rgb(41, 93, 151);
+            margin-top: none;
+            padding-top: none;
+        }
+
+        .submit_todo{
+            padding-left: 10px;
+            border: 1px solid gray;
+            margin-right: -10px;
+        }
+
+        .submit_todo:active{
+            border: none;
+        }
+
+        .list_elements{
+            display: flex;
+            flex-direction: column;
+            float: right;
+            flex: 3;
+        }
+
+        li{
+            list-style: none;
+            position: relative;
+            margin-bottom: 10px;
+            font-size: 13px;
+        }
+
+        li:hover, li:active{
+            background-color: rgb(206, 204, 204);
+            padding: 4px 0;
+
+        }
+
+        li .delete{
+            padding-left: 100px;
+            margin-left: 40px;
+            align-items: end;
+            position: absolute;
+            right: 50px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        li .delete:hover, li .delete:active{
+            background-color: red;
+            padding: 3px 5px;
+            margin-bottom: 3px;
+            color: white;
+            text-decoration: none;
+ 
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main">
+        <h2 class="title">Django Todo List App</h2>
+        <form action="" method="POST">
+            {% csrf_token %}
+            <div class="type_todo">
+                <input type="text" name="title" placeholder="Title...." class="submit_todo">
+                <button type="submit" class="add_todo">Add</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="list elements">
+        <ul>
+            {% for todo in todos reversed %}
+            <li>{{todo.title | title}} <span class="delete"><a href="delete/{{todo.id}}">Delete</a></span></li>
+            {% endfor %}
+        </ul>
+    </div>
+    
+</body>
+</html>
